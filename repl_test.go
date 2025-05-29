@@ -36,3 +36,9 @@ func TestCleanInput(t *testing.T) {
 	fmt.Printf("All tests passed")
 
 }
+
+func TestCommandExit(t *testing.T) {
+	if commandExit() != nil {
+		t.Errorf("Wrong Error Message")
+	}
+}
