@@ -13,18 +13,7 @@ type cliCommand struct {
 	callback    func() error
 }
 
-var commands = map[string]cliCommand{
-	"exit": {
-		name:        "exit",
-		description: "Exits the Pokedex",
-		callback:    commandExit,
-	},
-	"help": {
-		name:        "help",
-		description: "Displays a help message",
-		callback:    commandHelp,
-	},
-}
+var commands = make(map[string]cliCommand)
 
 func cleanInput(text string) []string {
 
@@ -34,6 +23,18 @@ func cleanInput(text string) []string {
 }
 
 func startRepl() {
+
+	commands["exit"] = cliCommand{
+		name:        "exit",
+		description: "Exits the Pokedex",
+		callback:    commandExit,
+	}
+	commands["help"] = cliCommand{
+		name:        "help",
+		description: "Displays a help message",
+		callback:    commandHelp,
+	}
+
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		// prints without new line
