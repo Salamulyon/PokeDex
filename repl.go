@@ -22,18 +22,24 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func startRepl() {
+func commandsInit() {
 
-	commands["exit"] = cliCommand{
-		name:        "exit",
-		description: "Exits the Pokedex",
-		callback:    commandExit,
-	}
 	commands["help"] = cliCommand{
 		name:        "help",
 		description: "Displays a help message",
 		callback:    commandHelp,
 	}
+	commands["exit"] = cliCommand{
+		name:        "exit",
+		description: "Exit the Pokedex",
+		callback:    commandExit,
+	}
+
+}
+
+func startRepl() {
+
+	commandsInit()
 
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -46,31 +52,14 @@ func startRepl() {
 			continue
 		}
 		command := words[0]
-		if value, ok := commands[command]; ok {
-			err := value.callback()
-			fmt.Println(err)
+		if command, ok := commands[command]; ok {
+			err := command.callback()
+			if err != nil {
+				fmt.Println(err)
+			}
 		} else {
 			fmt.Println("Unknown command")
 		}
 	}
 
-}
-
-func commandExit() error {
-
-	fmt.Println("Closing the Pokedex... Goodbye!")
-	os.Exit(0)
-
-	return nil
-}
-
-func commandHelp() error {
-
-	fmt.Println("Welcome to the Pokedex!")
-	fmt.Println("Usage:\n")
-
-	for _, value := range commands {
-		fmt.Printf("%s: %s\n", value, value.description)
-	}
-	return nil
 }
