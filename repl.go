@@ -3,14 +3,21 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"net/url"
 	"os"
 	"strings"
 )
 
 type cliCommand struct {
-	name        string
-	description string
-	callback    func() error
+	name          string
+	description   string
+	callback      func() error
+	configuration *config
+}
+
+type config struct {
+	Next     url.URL
+	Previous url.URL
 }
 
 var commands = make(map[string]cliCommand)
@@ -25,14 +32,22 @@ func cleanInput(text string) []string {
 func commandsInit() {
 
 	commands["help"] = cliCommand{
-		name:        "help",
-		description: "Displays a help message",
-		callback:    commandHelp,
+		name:          "help",
+		description:   "Displays a help message",
+		callback:      commandHelp,
+		configuration: &config{},
 	}
 	commands["exit"] = cliCommand{
-		name:        "exit",
-		description: "Exit the Pokedex",
-		callback:    commandExit,
+		name:          "exit",
+		description:   "Exit the Pokedex",
+		callback:      commandExit,
+		configuration: &config{},
+	}
+	commands["map"] = cliCommand{
+		name:          "map",
+		description:   "Display the names of 20 locations in the world",
+		callback:      commandMap,
+		configuration: &config{},
 	}
 
 }
