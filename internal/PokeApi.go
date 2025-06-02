@@ -1,4 +1,4 @@
-package internal
+package pokeapi
 
 import (
 	"encoding/json"
@@ -6,9 +6,11 @@ import (
 	"net/http"
 )
 
-func GetLocationArea() (PokeAPIJsonResponse, error) {
-	url := "https://pokeapi.co/api/v2/location-area/"
-
+func GetLocationArea(url string) (PokeAPIJsonResponse, error) {
+	if url == nil{
+		url := "https://pokeapi.co/api/v2/location-area/"
+	}
+	
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return PokeAPIJsonResponse{}, fmt.Errorf("couldn't get the requested location area")
