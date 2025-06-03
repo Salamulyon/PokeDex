@@ -1,4 +1,4 @@
-package internal
+package pokeapi
 
 type PokeAPIJsonResponse struct {
 	Count    int    `json:"count"`
