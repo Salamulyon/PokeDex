@@ -1,3 +1,4 @@
-module github.com/Salamulyon/PokeDex
+module github.com/Salamulyon/Pokedex
 
 go 1.22.2
+

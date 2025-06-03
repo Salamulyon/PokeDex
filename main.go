@@ -1,6 +1,6 @@
 package main
 
-import "github.com/salamulyon/PokeDex/internal/pokeapi"
+import "github.com/Salamulyon/PokeDex/internal/pokeapi"
 
 func main() {
 	client := pokeapi.NewClient()

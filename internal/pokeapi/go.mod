@@ -1,3 +1,3 @@
-module github.com/salamulyon/PokeDex/internal/pokeapi
+module github.com/Salamulyon/internal/pokeapi
 
 go 1.22.2

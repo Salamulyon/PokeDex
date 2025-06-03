@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/salamulyon/PokeDex/internal/pokeapi"
+	"github.com/Salamulyon/PokeDex/internal/pokeapi"
 )
 
 type cliCommand struct {
