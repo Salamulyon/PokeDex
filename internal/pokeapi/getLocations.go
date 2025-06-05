@@ -6,11 +6,17 @@ import (
 	"net/http"
 )
 
-func (c *Client) GetStructResponse(baseurl string) (PokeAPIJsonResponse, error) {
+func (c *Client) GetStructResponse(url *string) (PokeAPIJsonResponse, error) {
 
-	url := baseurl + "/location-area"
+	var finalURL string
 
-	req, err := http.NewRequest("GET", url, nil)
+	if url == nil {
+		finalURL = basePokeURL
+	} else {
+		finalURL = *url
+	}
+
+	req, err := http.NewRequest("GET", finalURL, nil)
 	if err != nil {
 		return PokeAPIJsonResponse{}, fmt.Errorf("couldn't get the requested location area")
 	}

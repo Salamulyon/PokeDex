@@ -6,12 +6,14 @@ import (
 )
 
 func commandMapf(cfg *config) error {
+
 	locations, err := cfg.client.GetStructResponse(cfg.nextLocations)
 	if err != nil {
-		return fmt.Errorf("Couldnt get next locations because of :%v", err)
+		return err
 	}
-	cfg.nextLocations = locations.Next
-	cfg.previousLocations = locations.Previous
+
+	cfg.nextLocations = &locations.Next
+	cfg.previousLocations = &locations.Previous
 
 	for _, loc := range locations.Results {
 		fmt.Println(loc.Name)
@@ -21,14 +23,14 @@ func commandMapf(cfg *config) error {
 
 func commandMapb(cfg *config) error {
 	if cfg.previousLocations == nil {
-		return errors.New("You're on the first page")
+		return errors.New("you're on the first page")
 	}
-	locations, err := cfg.client.GetStructResponse(cfg.nextLocations)
+	locations, err := cfg.client.GetStructResponse(cfg.previousLocations)
 	if err != nil {
-		return fmt.Errorf("Couldnt get next locations because of :%v", err)
+		return err
 	}
-	cfg.nextLocations = locations.Next
-	cfg.previousLocations = locations.Previous
+	cfg.nextLocations = &locations.Next
+	cfg.previousLocations = &locations.Previous
 
 	for _, loc := range locations.Results {
 		fmt.Println(loc.Name)

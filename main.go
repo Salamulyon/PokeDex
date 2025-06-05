@@ -1,11 +1,13 @@
 package main
 
-import "github.com/Salamulyon/PokeDex/internal/pokeapi"
+import "github.com/Salamulyon/Pokedex/internal/pokeapi"
+
+//import "github.com/Salamulyon/PokeDex/internal/pokeapi"
 
 func main() {
-	client := pokeapi.NewClient()
+	pokeClient := pokeapi.NewClient()
 	cfg := &config{
-		client: client,
+		client: pokeClient,
 	}
 	startRepl(cfg)
 }

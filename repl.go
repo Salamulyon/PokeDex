@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Salamulyon/PokeDex/internal/pokeapi"
+	"github.com/Salamulyon/Pokedex/internal/pokeapi"
 )
 
 type cliCommand struct {
@@ -16,7 +16,7 @@ type cliCommand struct {
 }
 
 type config struct {
-	client            *pokeapi.Client
+	client            pokeapi.Client
 	nextLocations     *string
 	previousLocations *string
 }
@@ -48,7 +48,7 @@ func commandsInit() {
 		callback:    commandMapf,
 	}
 	commands["mapb"] = cliCommand{
-		name:        "map",
+		name:        "mapb",
 		description: "Get the previous page of locations",
 		callback:    commandMapb,
 	}
