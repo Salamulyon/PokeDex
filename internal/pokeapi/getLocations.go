@@ -23,7 +23,7 @@ func (c *Client) GetStructResponse(url *string) (PokeAPIJsonResponse, error) {
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return PokeAPIJsonResponse{}, fmt.Errorf("client couldnt process the request")
+		return PokeAPIJsonResponse{}, fmt.Errorf("client couldnt process the request because of %v", err)
 	}
 
 	defer resp.Body.Close()
