@@ -6,20 +6,24 @@ import (
 	"net/http"
 )
 
-func GetLocationArea(url string) (PokeAPIJsonResponse, error) {
-	if url == nil{
-		url := "https://pokeapi.co/api/v2/location-area/"
+func (c *Client) GetStructResponse(url *string) (PokeAPIJsonResponse, error) {
+
+	var finalURL string
+
+	if url == nil {
+		finalURL = basePokeURL
+	} else {
+		finalURL = *url
 	}
-	
-	req, err := http.NewRequest("GET", url, nil)
+
+	req, err := http.NewRequest("GET", finalURL, nil)
 	if err != nil {
 		return PokeAPIJsonResponse{}, fmt.Errorf("couldn't get the requested location area")
 	}
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return PokeAPIJsonResponse{}, fmt.Errorf("client couldnt process the request")
+		return PokeAPIJsonResponse{}, fmt.Errorf("client couldnt process the request because of %v", err)
 	}
 
 	defer resp.Body.Close()
