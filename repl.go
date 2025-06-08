@@ -12,7 +12,7 @@ type cliCommand struct {
 	name          string
 	description   string
 	callback      func() error
-	configuration *config
+	configuration *config{}
 }
 
 type config struct {
